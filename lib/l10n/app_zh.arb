@@ -1,8 +1,10 @@
 {
   "accountEmail": "電子郵件",
+  "accountInvalidEmail": "無效的電子郵件",
   "accountLogin": "登入",
   "accountLoginTitle": "登入您的 RPMTW 帳號",
   "accountPassword": "密碼",
+  "accountProviders": "或用以下方式登入",
   "accountSignup": "註冊新帳號",
   "accountTitle": "RPMTW 帳號"
 }

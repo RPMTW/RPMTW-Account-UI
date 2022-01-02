@@ -1,8 +1,10 @@
 {
   "accountEmail": "Email",
+  "accountInvalidEmail": "Invalid email",
   "accountLogin": "Login",
   "accountLoginTitle": "Login to your RPMTW account",
   "accountPassword": "Password",
+  "accountProviders": "or login with",
   "accountSignup": "Signup  new account",
   "accountTitle": "RPMTW Account"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
 
 class AddAccountView extends StatefulWidget {
@@ -10,62 +11,56 @@ class AddAccountView extends StatefulWidget {
 }
 
 class _AddAccountViewState extends State<AddAccountView> {
-  Map users = {
-    'dribbble@gmail.com': '12345',
-    'hunter@gmail.com': 'hunter',
-  };
-  Duration get loginTime => Duration(milliseconds: 2250);
-  Future<String?> _authUser(LoginData data) {
-    debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
-      }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
-    });
-  }
+  Future<String?> _authUser(LoginData data) async {}
 
-  Future<String?> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
-  }
+  Future<String?> _signupUser(SignupData data) async {}
 
-  Future<String?> _recoverPassword(String name) {
-    debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
-      return null;
-    });
-  }
+  Future<String?> _recoverPassword(String name) async {}
 
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
-      title: localizations.accountLoginTitle,
-      logo: const AssetImage(
-        "assets/images/RPMTW_Logo.gif",
-      ),
-      messages: LoginMessages(
-        passwordHint: localizations.accountPassword,
-        userHint: localizations.accountEmail,
-        signupButton: localizations.accountSignup,
-        loginButton: localizations.accountLogin,
-      ),
-      onLogin: _authUser,
-      onSignup: _signupUser,
-      onSubmitAnimationCompleted: () {
-        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //   builder: (context) => DashboardScreen(),
-        // ));
-      },
-      onRecoverPassword: _recoverPassword,
-    );
+        title: localizations.accountLoginTitle,
+        logo: const AssetImage(
+          "assets/images/RPMTW_Logo.gif",
+        ),
+        messages: LoginMessages(
+          passwordHint: localizations.accountPassword,
+          userHint: localizations.accountEmail,
+          signupButton: localizations.accountSignup,
+          loginButton: localizations.accountLogin,
+          providersTitleFirst: localizations.accountProviders,
+        ),
+        userValidator: (String? email) {
+          RegExp regExp = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
+          if (email!.isEmpty || !regExp.hasMatch(email)) {
+            return localizations.accountInvalidEmail;
+          }
+        },
+        onLogin: _authUser,
+        onSignup: _signupUser,
+        onSubmitAnimationCompleted: () {
+          // Navigator.of(context).pushReplacement(MaterialPageRoute(
+          //   builder: (context) => DashboardScreen(),
+          // ));
+        },
+        onRecoverPassword: _recoverPassword,
+        loginProviders: [
+          LoginProvider(
+            icon: FontAwesomeIcons.google,
+            label: 'Google',
+            callback: () async {},
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.facebook,
+            label: 'Facebook',
+            callback: () async {},
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.github,
+            label: 'Github',
+            callback: () async {},
+          ),
+        ]);
   }
 }
