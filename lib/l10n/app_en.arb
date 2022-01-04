@@ -1,10 +1,24 @@
 {
+  "accountAdditionalSignup": "Please fill in this form to complete the sign.up.",
+  "accountConfirmPassword": "Confirm password",
+  "accountConfirmPasswordError": "Password do not match!",
+  "accountCreateError": "Create RPMTW Account Failed",
   "accountEmail": "Email",
   "accountInvalidEmail": "Invalid email",
   "accountLogin": "Login",
   "accountLoginTitle": "Login to your RPMTW account",
+  "accountNotFound": "Can't find your RPMTW account",
   "accountPassword": "Password",
+  "accountPasswordError": "Password error, please try again.",
+  "accountPasswordNeedsEnglish": "Password must contain at least one letter of English.",
+  "accountPasswordNeedsNumber": "Password must contain at least one number.",
+  "accountPasswordTooLong": "Password must be less than 30 characters long.",
+  "accountPasswordTooShort": "Password must be at least 6 characters long.",
   "accountProviders": "or login with",
   "accountSignup": "Signup  new account",
-  "accountTitle": "RPMTW Account"
+  "accountTitle": "RPMTW Account",
+  "accountUsername": "Username",
+  "accountUsernameError": "User name cannot be empty.",
+  "guiError": "Error",
+  "guiSubmit": "Submit"
 }

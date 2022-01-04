@@ -29,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  byte_size:
-    dependency: transitive
-    description:
-      name: byte_size
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0-nullsafety.0"
   characters:
     dependency: transitive
     description:
@@ -71,13 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  dio:
-    dependency: transitive
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -133,6 +119,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.2.0"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.4"
   http_parser:
     dependency: transitive
     description:
@@ -227,10 +220,12 @@ packages:
   rpmtw_api_client:
     dependency: "direct main"
     description:
-      name: rpmtw_api_client
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
+      path: "."
+      ref: HEAD
+      resolved-ref: "130a92655fc19b42943abb4cd127824812d50308"
+      url: "https://github.com/RPMTW/RPMTW-API-Client.git"
+    source: git
+    version: "1.0.1+1"
   sky_engine:
     dependency: transitive
     description: flutter
