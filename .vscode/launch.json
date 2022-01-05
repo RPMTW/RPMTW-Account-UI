@@ -9,6 +9,11 @@
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
+            "toolArgs": [
+                "--web-port=41351",
+                "--web-renderer",
+                "html"
+            ],
         },
         {
             "name": "rpmtw_account_ui (profile mode)",
@@ -16,6 +21,11 @@
             "type": "dart",
             "flutterMode": "profile",
             "program": "lib/main.dart",
+            "toolArgs": [
+                "--web-port=41351",
+                "--web-renderer",
+                "html"
+            ],
         }
     ]
 }

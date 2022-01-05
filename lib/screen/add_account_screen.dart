@@ -123,7 +123,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
         },
         onLogin: _loginUser,
         onSignup: _signupUser,
-        footer: "Copyright © RPMTW 2021-2022 Powered by The RPMTW Team",
+        footer: localizations.guiCopyright,
         hideForgotPasswordButton: true, //目前尚未支援忘記密碼功能
         additionalSignupFields: [
           UserFormField(

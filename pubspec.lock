@@ -222,7 +222,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "130a92655fc19b42943abb4cd127824812d50308"
+      resolved-ref: e719c262790eec29e5b8f21dfd54b854ce451d71
       url: "https://github.com/RPMTW/RPMTW-API-Client.git"
     source: git
     version: "1.0.1+1"

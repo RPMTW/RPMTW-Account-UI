@@ -26,6 +26,13 @@ class AccountHandler {
   static int get userCount => users.length;
 
   static void add(Account user) {
+    try {
+      /// 如果未拋出錯誤代表有找到 UUID 相同的使用者帳號，就將該使用者帳號刪除替換為新的
+      Account duplicateUser = users.firstWhere((_user) => _user.uuid == user.uuid);
+      users.remove(duplicateUser);
+      // ignore: empty_catches
+    } catch (e) {}
+
     users.add(user);
     save();
   }

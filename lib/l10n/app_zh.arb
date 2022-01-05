@@ -19,6 +19,7 @@
   "accountTitle": "RPMTW 帳號",
   "accountUsername": "使用者名稱",
   "accountUsernameError": "使用者名稱不能為空。",
+  "guiCopyright": "版權所有 © RPMTW 2021-2022 由 RPMTW Team 提供支援。",
   "guiError": "錯誤",
   "guiSubmit": "送出"
 }
