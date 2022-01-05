@@ -15,6 +15,7 @@
   "accountPasswordTooLong": "密碼必須少於30個字元。",
   "accountPasswordTooShort": "密碼至少需要6個字元。",
   "accountProviders": "或用以下方式登入",
+  "accountSelect": "請選取帳戶以登入此服務...",
   "accountSignup": "註冊新帳號",
   "accountTitle": "RPMTW 帳號",
   "accountUsername": "使用者名稱",

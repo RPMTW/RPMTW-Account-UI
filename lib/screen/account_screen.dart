@@ -25,99 +25,95 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Row(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-        //       Image.asset(
-        //         "assets/images/RPMTW_Logo.gif",
-        //         width: 45,
-        //         height: 45,
-        //       ),
-        //       const SizedBox(width: 10),
-        //       Text(localizations.accountTitle),
-        //     ],
-        //   ),
-        // ),
         body: Stack(
       children: [
         Center(
           child: Builder(builder: (context) {
             Size size = MediaQuery.of(context).size;
             return Container(
-              // decoration:
-              //     BoxDecoration(border: Border.all(color: Colors.black)),
               alignment: Alignment.center,
               width: size.width / 4,
               height: size.height / 1.8,
               child: ColoredBox(
                 color: const Color.fromARGB(55, 15, 15, 15),
-                child: ListView.builder(
-                    itemCount: AccountHandler.userCount,
-                    itemBuilder: (context, index) {
-                      Account account = users[index];
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(localizations.accountSelect,
+                        style: const TextStyle(fontSize: 20)),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: AccountHandler.userCount,
+                          itemBuilder: (context, index) {
+                            Account account = users[index];
 
-                      CircleAvatar avatar;
+                            CircleAvatar avatar;
 
-                      String? avatarUrl = account
-                          .avatarUrl(RPMTWApiClient.lastInstance.baseUrl);
+                            String? avatarUrl = account
+                                .avatarUrl(RPMTWApiClient.lastInstance.baseUrl);
 
-                      if (avatarUrl != null) {
-                        avatar = CircleAvatar(
-                          backgroundImage: NetworkImage(avatarUrl),
-                        );
-                      } else {
-                        /// 隨機生成顏色
-                        Color color =
-                            Color((Random().nextDouble() * 0xFFFFFF).toInt())
-                                .withOpacity(1.0);
-                        avatar = CircleAvatar(
-                          backgroundColor: color,
-                          child: Text(
-                            account.username.characters.first,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }
+                            if (avatarUrl != null) {
+                              avatar = CircleAvatar(
+                                backgroundImage: NetworkImage(avatarUrl),
+                              );
+                            } else {
+                              /// 隨機生成顏色
+                              Color color = Color(
+                                      (Random().nextDouble() * 0xFFFFFF)
+                                          .toInt())
+                                  .withOpacity(1.0);
+                              avatar = CircleAvatar(
+                                backgroundColor: color,
+                                child: Text(
+                                  account.username.characters.first,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                              );
+                            }
 
-                      return ListTile(
-                        leading: avatar,
-                        title: Text(account.username),
-                        subtitle: Text(account.email),
-                        hoverColor: const Color.fromARGB(85, 31, 30, 30),
-                        trailing: PopupMenuButton(
-                            tooltip: "顯示更多",
-                            itemBuilder: (context) => [
-                                  const PopupMenuItem(
-                                    child: Text("使用本帳號登入"),
-                                    value: 1,
-                                  ),
-                                  const PopupMenuItem(
-                                    child: Text("管理帳號"),
-                                    value: 2,
-                                  ),
-                                  const PopupMenuItem(
-                                    child: Text("移除帳號"),
-                                    value: 3,
-                                  ),
-                                ],
-                            onSelected: (int _index) {
-                              switch (_index) {
-                                case 1:
-                                  break;
-                                case 2:
-                                  break;
-                                case 3:
-                                  break;
-                                default:
-                                  break;
-                              }
-                            }),
-                        onTap: () {
-                          // TODO:Implement
-                        },
-                      );
-                    }),
+                            return ListTile(
+                              leading: avatar,
+                              title: Text(account.username),
+                              subtitle: Text(account.email),
+                              hoverColor: const Color.fromARGB(85, 31, 30, 30),
+                              trailing: PopupMenuButton(
+                                  tooltip: "顯示更多",
+                                  itemBuilder: (context) => [
+                                        const PopupMenuItem(
+                                          child: Text("使用本帳號登入"),
+                                          value: 1,
+                                        ),
+                                        const PopupMenuItem(
+                                          child: Text("管理帳號"),
+                                          value: 2,
+                                        ),
+                                        const PopupMenuItem(
+                                          child: Text("移除帳號"),
+                                          value: 3,
+                                        ),
+                                      ],
+                                  onSelected: (int _index) {
+                                    switch (_index) {
+                                      case 1:
+                                        break;
+                                      case 2:
+                                        break;
+                                      case 3:
+                                        break;
+                                      default:
+                                        break;
+                                    }
+                                  }),
+                              onTap: () {
+                                // TODO:Implement
+                              },
+                            );
+                          }),
+                    ),
+                  ],
+                ),
               ),
             );
           }),
