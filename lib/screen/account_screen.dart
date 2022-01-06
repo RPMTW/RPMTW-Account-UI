@@ -1,10 +1,13 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rpmtw_api_client/rpmtw_api_client.dart';
+
 import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
-import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -20,6 +23,14 @@ class _AccountScreenState extends State<AccountScreen> {
   void initState() {
     users = AccountHandler.users;
     super.initState();
+  }
+
+  Future<void> _callbackUrl(Account account) async {
+    if (callback != null) {
+      String url = callback!;
+      url = url.replaceAll(r"${token}", account.token);
+      window.location.href = url;
+    }
   }
 
   @override
@@ -38,11 +49,15 @@ class _AccountScreenState extends State<AccountScreen> {
                 color: const Color.fromARGB(55, 15, 15, 15),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(localizations.accountSelect,
-                        style: const TextStyle(fontSize: 20)),
+                    ...callback != null
+                        ? [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(localizations.accountSelect,
+                                style: const TextStyle(fontSize: 20)),
+                          ]
+                        : [],
                     Expanded(
                       child: ListView.builder(
                           itemCount: AccountHandler.userCount,
@@ -97,6 +112,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                   onSelected: (int _index) {
                                     switch (_index) {
                                       case 1:
+                                        _callbackUrl(account);
                                         break;
                                       case 2:
                                         break;
@@ -106,9 +122,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                         break;
                                     }
                                   }),
-                              onTap: () {
-                                // TODO:Implement
-                              },
+                              onTap: () => _callbackUrl(account),
                             );
                           }),
                     ),

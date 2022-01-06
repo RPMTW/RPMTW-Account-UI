@@ -1,3 +1,6 @@
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,9 +8,16 @@ import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
+import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 void main() async {
+  Uri _uri = Uri.parse(window.location.href);
+  String? _callback = _uri.queryParameters['rpmtw_auth_callback'];
+  if (_callback != null && _callback.contains(r"${token}")) {
+    callback = _callback;
+  }
+  
   AccountHandler.init();
   RPMTWApiClient(); // Initialize RPMTWApiClient
   runApp(const AccountApp());
@@ -28,13 +38,7 @@ class AccountApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
           AppLocalizations.delegate,
         ],
-        supportedLocales: const [
-          Locale('en', 'us'), // English
-          Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hant'), // Chinese (Traditional)
-          Locale.fromSubtags(
-              languageCode: 'zh', scriptCode: 'Hans') // Chinese (Simplified)
-        ],
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
             primarySwatch: Colors.blue,
             brightness: Brightness.dark,
