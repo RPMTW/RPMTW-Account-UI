@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpmtw_account_ui/models/account.dart';
+import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
@@ -55,13 +56,17 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     String username = data.additionalSignupData!['username']!;
     String email = data.name!;
     String password = data.password!;
-
     CreateUserResult createUserResult;
     try {
       createUserResult = await _apiClient.authResource
           .createUser(username: username, email: email, password: password);
     } catch (e) {
-      return localizations.accountCreateError;
+      String errorMsg = e.toString();
+      if (errorMsg.contains("the email has already been used")) {
+        return localizations.accountAlreadyUsedEmail;
+      } else {
+        return localizations.accountCreateError + "\n$errorMsg";
+      }
     }
 
     User user = createUserResult.user;
@@ -99,6 +104,15 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
           additionalSignUpSubmitButton: localizations.guiSubmit,
           confirmPasswordHint: localizations.accountConfirmPassword,
           confirmPasswordError: localizations.accountConfirmPasswordError,
+          confirmSignupIntro: localizations.accountAuthCodeIntro,
+          confirmationCodeHint: localizations.accountAuthCodeTitle,
+          confirmationCodeValidationError: localizations.accountAuthCodeError,
+          flushbarTitleSuccess: localizations.guiSuccess,
+          resendCodeButton: localizations.accountResendCode,
+          signUpSuccess: localizations.accountAuthCodeSent,
+          goBackButton: localizations.guiBack,
+          confirmSignupSuccess: localizations.accountCreateSuccess,
+          resendCodeSuccess: localizations.accountAuthCodeSent,
         ),
         userValidator: (String? email) {
           RegExp regExp = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
@@ -123,6 +137,19 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
         },
         onLogin: _loginUser,
         onSignup: _signupUser,
+        onConfirmSignup: (code, loginData) async {
+          int authCode = int.parse(code);
+          bool isValid = await _apiClient.authResource
+              .validAuthCode(email: loginData.name, code: authCode);
+
+          if (!isValid) {
+            return localizations.accountAuthCodeError;
+          }
+        },
+        onResendCode: (singUPData) async {
+          // RPMTW 暫時不支援重新寄送驗證碼
+          return localizations.guiWIP;
+        },
         footer: localizations.guiCopyright,
         hideForgotPasswordButton: true, //目前尚未支援忘記密碼功能
         additionalSignupFields: [
@@ -137,28 +164,30 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               }),
         ],
         onSubmitAnimationCompleted: () {
-          print("test");
-          // TODO:實現頁面轉向 (callback)
-          // Navigator.of(context).pushReplacement(MaterialPageRoute(
-          //   builder: (context) => DashboardScreen(),
-          // ));
+          navigation.pushNamed(AccountScreen.route);
         },
         onRecoverPassword: _recoverPassword,
         loginProviders: [
           LoginProvider(
             icon: FontAwesomeIcons.google,
             label: 'Google',
-            callback: () async {},
+            callback: () async {
+              return localizations.guiWIP;
+            },
           ),
           LoginProvider(
             icon: FontAwesomeIcons.facebook,
             label: 'Facebook',
-            callback: () async {},
+            callback: () async {
+              return localizations.guiWIP;
+            },
           ),
           LoginProvider(
             icon: FontAwesomeIcons.github,
             label: 'Github',
-            callback: () async {},
+            callback: () async {
+              return localizations.guiWIP;
+            },
           ),
         ]);
   }

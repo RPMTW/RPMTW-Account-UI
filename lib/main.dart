@@ -17,7 +17,7 @@ void main() async {
   if (_callback != null && _callback.contains(r"${token}")) {
     callback = _callback;
   }
-  
+
   AccountHandler.init();
   RPMTWApiClient(); // Initialize RPMTWApiClient
   runApp(const AccountApp());
@@ -53,10 +53,13 @@ class AccountApp extends StatelessWidget {
             return MaterialPageRoute(
                 settings: settings,
                 builder: (context) => const AddAccountScreen());
-          } else {
+          } else if (settings.name == AccountScreen.route) {
             return MaterialPageRoute(
                 settings: settings,
                 builder: (context) => const AccountScreen());
+          } else {
+            return MaterialPageRoute(
+                settings: settings, builder: (context) => const HomePage());
           }
         });
   }

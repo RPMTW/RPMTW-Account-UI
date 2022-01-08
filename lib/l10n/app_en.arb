@@ -1,8 +1,14 @@
 {
   "accountAdditionalSignup": "Please fill in this form to complete the sign up.",
+  "accountAlreadyUsedEmail": "This email address has been used.",
+  "accountAuthCodeError": "The verification code is wrong, please try again.",
+  "accountAuthCodeIntro": "A verification code has been sent to your email address, please enter the code to enable your account.",
+  "accountAuthCodeSent": "The verification code has been sent to your email address.",
+  "accountAuthCodeTitle": "Verification Code",
   "accountConfirmPassword": "Confirm password",
   "accountConfirmPasswordError": "Password do not match!",
   "accountCreateError": "Create RPMTW Account Failed",
+  "accountCreateSuccess": "Successfully register and activate your account.",
   "accountEmail": "Email",
   "accountInvalidEmail": "Invalid email",
   "accountLogin": "Login",
@@ -16,12 +22,16 @@
   "accountPasswordTooLong": "Password must be less than 30 characters long.",
   "accountPasswordTooShort": "Password must be at least 6 characters long.",
   "accountProviders": "or login with",
+  "accountResendCode": "Resend Authentication Code (WIP)",
   "accountSelect": "Please select an account to log in to this service...",
   "accountSignup": "Signup  new account",
   "accountTitle": "RPMTW Account",
   "accountUsername": "Username",
   "accountUsernameError": "User name cannot be empty.",
+  "guiBack": "Back",
   "guiCopyright": "Copyright © RPMTW 2021-2022 Powered by The RPMTW Team.",
   "guiError": "Error",
-  "guiSubmit": "Submit"
+  "guiSubmit": "Submit",
+  "guiSuccess": "Success",
+  "guiWIP": "This feature is still under development, sorry for the hassle."
 }
