@@ -76,7 +76,11 @@ class _AccountScreenState extends State<AccountScreen> {
                             itemCount: AccountHandler.userCount,
                             itemBuilder: (context, index) {
                               Account account = users[index];
-                              return _AccountListTitle(account: account);
+                              if (account.emailVerified) {
+                                return _AccountListTitle(account: account);
+                              } else {
+                                return const SizedBox.shrink();
+                              }
                             }),
                       ),
                       ListTile(
@@ -159,14 +163,6 @@ class __AccountListTitleState extends State<_AccountListTitle> {
     super.initState();
   }
 
-  Future<void> _callbackUrl(String token) async {
-    if (callback != null) {
-      String url = callback!;
-      url = url.replaceAll(r"${token}", token);
-      window.location.href = url;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -197,7 +193,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
           onSelected: (int _index) {
             switch (_index) {
               case 1:
-                _callbackUrl(token);
+                AccountHandler.callbackUrl(token);
                 break;
               case 2:
                 break;
@@ -209,7 +205,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
                 break;
             }
           }),
-      onTap: () => _callbackUrl(token),
+      onTap: () => AccountHandler.callbackUrl(token),
     );
   }
 }

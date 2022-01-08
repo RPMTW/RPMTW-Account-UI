@@ -29,6 +29,7 @@
   "accountUsername": "Username",
   "accountUsernameError": "User name cannot be empty.",
   "guiBack": "Back",
+  "guiConfirm": "Confirm",
   "guiCopyright": "Copyright © RPMTW 2021-2022 Powered by The RPMTW Team.",
   "guiError": "Error",
   "guiSubmit": "Submit",

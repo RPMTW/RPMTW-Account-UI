@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:rpmtw_account_ui/models/account.dart';
+import 'package:rpmtw_account_ui/utilities/data.dart';
 
 class AccountHandler {
   static late html.Storage storage;
@@ -28,7 +29,8 @@ class AccountHandler {
   static void add(Account user) {
     try {
       /// 如果未拋出錯誤代表有找到 UUID 相同的使用者帳號，就將該使用者帳號刪除替換為新的
-      Account duplicateUser = users.firstWhere((_user) => _user.uuid == user.uuid);
+      Account duplicateUser =
+          users.firstWhere((_user) => _user.uuid == user.uuid);
       users.remove(duplicateUser);
       // ignore: empty_catches
     } catch (e) {}
@@ -46,5 +48,13 @@ class AccountHandler {
     List<Map<String, dynamic>> accountJson =
         users.map((user) => user.toMap()).toList();
     storage['rpmtw_account'] = json.encode(accountJson);
+  }
+
+  static void callbackUrl(String token) {
+    if (callback != null) {
+      String url = callback!;
+      url = url.replaceAll(r"${token}", token);
+      html.window.location.href = url;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 class Account extends User {
@@ -31,6 +32,14 @@ class Account extends User {
         status: map['status'],
         message: map['message'],
         token: data['token']);
+  }
+
+  static Account? findByEmail(String email) {
+    try {
+      return AccountHandler.users.firstWhere((user) => user.email == email);
+    } catch (e) {
+      return null;
+    }
   }
 
   @override

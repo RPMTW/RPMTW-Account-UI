@@ -29,6 +29,7 @@
   "accountUsername": "使用者名称",
   "accountUsernameError": "使用者名称不能为空。",
   "guiBack": "返回",
+  "guiConfirm": "确认",
   "guiCopyright": "版权所有 © RPMTW 2021-2022 由 RPMTW Team 提供支持。",
   "guiError": "错误",
   "guiSubmit": "送出",

@@ -113,6 +113,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
           goBackButton: localizations.guiBack,
           confirmSignupSuccess: localizations.accountCreateSuccess,
           resendCodeSuccess: localizations.accountAuthCodeSent,
+          confirmSignupButton: localizations.guiConfirm,
         ),
         userValidator: (String? email) {
           RegExp regExp = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
@@ -144,6 +145,20 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
 
           if (!isValid) {
             return localizations.accountAuthCodeError;
+          } else {
+            Account? account = Account.findByEmail(loginData.name);
+            if (account != null) {
+              AccountHandler.add(Account(
+                uuid: account.uuid,
+                username: account.username,
+                email: account.email,
+                emailVerified: true,
+                avatarStorageUUID: account.avatarStorageUUID,
+                status: account.status,
+                message: account.message,
+                token: account.token,
+              ));
+            }
           }
         },
         onResendCode: (singUPData) async {
@@ -164,7 +179,13 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               }),
         ],
         onSubmitAnimationCompleted: () {
-          navigation.pushNamed(AccountScreen.route);
+          if (AccountHandler.userCount == 1 && callback != null) {
+            //僅有一個帳號
+            String token = AccountHandler.users[0].token;
+            AccountHandler.callbackUrl(token);
+          } else {
+            navigation.pushNamed(AccountScreen.route);
+          }
         },
         onRecoverPassword: _recoverPassword,
         loginProviders: [
