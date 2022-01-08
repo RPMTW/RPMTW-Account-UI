@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
+import 'package:rpmtw_account_ui/models/account.dart';
+import 'package:rpmtw_account_ui/screen/manage_account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
@@ -19,7 +21,7 @@ void main() async {
   }
 
   AccountHandler.init();
-  RPMTWApiClient(); // Initialize RPMTWApiClient
+  RPMTWApiClient(development: true); // Initialize RPMTWApiClient
   runApp(const AccountApp());
 }
 

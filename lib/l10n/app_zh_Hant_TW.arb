@@ -1,4 +1,7 @@
 {
+  "accountActionLogin": "使用本帳號登入",
+  "accountActionLogout": "登出帳號",
+  "accountActionManage": "管理帳號",
   "accountAdditionalSignup": "請填寫此表格以完成帳號註冊。",
   "accountAlreadyUsedEmail": "此電子郵件信箱已被使用。",
   "accountAuthCodeError": "驗證碼錯誤，請再試一次。",
@@ -28,6 +31,9 @@
   "accountTitle": "RPMTW 帳號",
   "accountUsername": "使用者名稱",
   "accountUsernameError": "使用者名稱不能為空。",
+  "changeAvatar": "更換個人資料照片",
+  "changeAvatarUpdateSuccess": "更換個人資料圖片成功。",
+  "changeAvatarUpdating": "正在上傳圖片中...",
   "guiBack": "返回",
   "guiConfirm": "確認",
   "guiCopyright": "版權所有 © RPMTW 2021-2022 由 RPMTW Team 提供支援。",

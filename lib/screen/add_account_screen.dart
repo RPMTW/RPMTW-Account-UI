@@ -41,15 +41,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     } catch (e) {
       return localizations.accountPasswordError;
     }
-    AccountHandler.add(Account(
-        uuid: user.email,
-        username: user.username,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        avatarStorageUUID: user.avatarStorageUUID,
-        status: user.status,
-        message: user.message,
-        token: token));
+    AccountHandler.addByUser(user, token);
   }
 
   Future<String?> _signupUser(SignupData data) async {
@@ -72,15 +64,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     User user = createUserResult.user;
     String token = createUserResult.token;
 
-    AccountHandler.add(Account(
-        uuid: user.email,
-        username: user.username,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        avatarStorageUUID: user.avatarStorageUUID,
-        status: user.status,
-        message: user.message,
-        token: token));
+    AccountHandler.addByUser(user, token);
   }
 
   Future<String?> _recoverPassword(String name) async {}

@@ -4,6 +4,7 @@ import 'dart:html' as html;
 
 import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
+import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 class AccountHandler {
   static late html.Storage storage;
@@ -26,7 +27,7 @@ class AccountHandler {
 
   static int get userCount => users.length;
 
-  static void add(Account user) {
+  static Account add(Account user) {
     try {
       /// 如果未拋出錯誤代表有找到 UUID 相同的使用者帳號，就將該使用者帳號刪除替換為新的
       Account duplicateUser =
@@ -37,6 +38,20 @@ class AccountHandler {
 
     users.add(user);
     save();
+    return user;
+  }
+
+  static Account addByUser(User user, String token) {
+    Account account = Account(
+        uuid: user.email,
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        avatarStorageUUID: user.avatarStorageUUID,
+        status: user.status,
+        message: user.message,
+        token: token);
+    return add(account);
   }
 
   static void remove(Account user) {

@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
-import 'package:rpmtw_api_client/rpmtw_api_client.dart';
+import 'package:rpmtw_account_ui/screen/manage_account_screen.dart';
 
 import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
@@ -134,30 +134,10 @@ class _AccountListTitle extends StatefulWidget {
 }
 
 class __AccountListTitleState extends State<_AccountListTitle> {
-  late CircleAvatar avatar;
   late String token;
 
   @override
   void initState() {
-    String? avatarUrl =
-        widget.account.avatarUrl(RPMTWApiClient.lastInstance.baseUrl);
-
-    if (avatarUrl != null) {
-      avatar = CircleAvatar(
-        backgroundImage: NetworkImage(avatarUrl),
-      );
-    } else {
-      /// 隨機生成顏色
-      Color color =
-          Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
-      avatar = CircleAvatar(
-        backgroundColor: color,
-        child: Text(
-          widget.account.username.characters.first,
-          style: const TextStyle(color: Colors.white),
-        ),
-      );
-    }
     token = widget.account.token;
 
     super.initState();
@@ -166,7 +146,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: avatar,
+      leading: widget.account.avatar(),
       title: Text(widget.account.username),
       subtitle: Text(widget.account.email),
       hoverColor: const Color.fromARGB(85, 31, 30, 30),
@@ -175,18 +155,18 @@ class __AccountListTitleState extends State<_AccountListTitle> {
           itemBuilder: (context) => [
                 ...callback != null
                     ? [
-                        const PopupMenuItem(
-                          child: Text("使用本帳號登入"),
+                        PopupMenuItem(
+                          child: Text(localizations.accountActionLogin),
                           value: 1,
                         ),
                       ]
                     : <PopupMenuItem<int>>[],
-                const PopupMenuItem(
-                  child: Text("管理帳號"),
+                PopupMenuItem(
+                  child: Text(localizations.accountActionManage),
                   value: 2,
                 ),
-                const PopupMenuItem(
-                  child: Text("登出帳號"),
+                PopupMenuItem(
+                  child: Text(localizations.accountActionLogout),
                   value: 3,
                 ),
               ],
@@ -196,6 +176,9 @@ class __AccountListTitleState extends State<_AccountListTitle> {
                 AccountHandler.callbackUrl(token);
                 break;
               case 2:
+                navigation.push(MaterialPageRoute(
+                    builder: (context) =>
+                        ManageAccountScreen(account: widget.account)));
                 break;
               case 3:
                 AccountHandler.remove(widget.account);

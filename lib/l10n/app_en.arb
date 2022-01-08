@@ -1,4 +1,7 @@
 {
+  "accountActionLogin": "Login with this account",
+  "accountActionLogout": "Logout Account",
+  "accountActionManage": "Management Account",
   "accountAdditionalSignup": "Please fill in this form to complete the sign up.",
   "accountAlreadyUsedEmail": "This email address has been used.",
   "accountAuthCodeError": "The verification code is wrong, please try again.",
@@ -28,6 +31,9 @@
   "accountTitle": "RPMTW Account",
   "accountUsername": "Username",
   "accountUsernameError": "User name cannot be empty.",
+  "changeAvatar": "Change your profile picture",
+  "changeAvatarUpdateSuccess": "The change of personal data picture was successful.",
+  "changeAvatarUpdating": "Uploading pictures now...",
   "guiBack": "Back",
   "guiConfirm": "Confirm",
   "guiCopyright": "Copyright © RPMTW 2021-2022 Powered by The RPMTW Team.",
