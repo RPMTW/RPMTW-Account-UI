@@ -6,6 +6,7 @@
   "accountEmail": "电子邮件",
   "accountInvalidEmail": "无效的电子邮件",
   "accountLogin": "登入",
+  "accountLoginOther": "登入其他账号...",
   "accountLoginTitle": "登入您的 RPMTW 账号",
   "accountNotFound": "找不到您的 RPMTW 账号",
   "accountPassword": "密码",

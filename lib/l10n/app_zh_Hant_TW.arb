@@ -6,6 +6,7 @@
   "accountEmail": "電子郵件",
   "accountInvalidEmail": "無效的電子郵件",
   "accountLogin": "登入",
+  "accountLoginOther": "登入其他帳號...",
   "accountLoginTitle": "登入您的 RPMTW 帳號",
   "accountNotFound": "找不到您的 RPMTW 帳號",
   "accountPassword": "密碼",

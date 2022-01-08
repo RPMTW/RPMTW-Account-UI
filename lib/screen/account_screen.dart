@@ -3,6 +3,7 @@ import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 import 'package:rpmtw_account_ui/models/account.dart';
@@ -23,14 +24,6 @@ class _AccountScreenState extends State<AccountScreen> {
   void initState() {
     users = AccountHandler.users;
     super.initState();
-  }
-
-  Future<void> _callbackUrl(Account account) async {
-    if (callback != null) {
-      String url = callback!;
-      url = url.replaceAll(r"${token}", account.token);
-      window.location.href = url;
-    }
   }
 
   @override
@@ -63,68 +56,15 @@ class _AccountScreenState extends State<AccountScreen> {
                           itemCount: AccountHandler.userCount,
                           itemBuilder: (context, index) {
                             Account account = users[index];
-
-                            CircleAvatar avatar;
-
-                            String? avatarUrl = account
-                                .avatarUrl(RPMTWApiClient.lastInstance.baseUrl);
-
-                            if (avatarUrl != null) {
-                              avatar = CircleAvatar(
-                                backgroundImage: NetworkImage(avatarUrl),
-                              );
-                            } else {
-                              /// 隨機生成顏色
-                              Color color = Color(
-                                      (Random().nextDouble() * 0xFFFFFF)
-                                          .toInt())
-                                  .withOpacity(1.0);
-                              avatar = CircleAvatar(
-                                backgroundColor: color,
-                                child: Text(
-                                  account.username.characters.first,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              );
-                            }
-
-                            return ListTile(
-                              leading: avatar,
-                              title: Text(account.username),
-                              subtitle: Text(account.email),
-                              hoverColor: const Color.fromARGB(85, 31, 30, 30),
-                              trailing: PopupMenuButton(
-                                  tooltip: "顯示更多",
-                                  itemBuilder: (context) => [
-                                        const PopupMenuItem(
-                                          child: Text("使用本帳號登入"),
-                                          value: 1,
-                                        ),
-                                        const PopupMenuItem(
-                                          child: Text("管理帳號"),
-                                          value: 2,
-                                        ),
-                                        const PopupMenuItem(
-                                          child: Text("移除帳號"),
-                                          value: 3,
-                                        ),
-                                      ],
-                                  onSelected: (int _index) {
-                                    switch (_index) {
-                                      case 1:
-                                        _callbackUrl(account);
-                                        break;
-                                      case 2:
-                                        break;
-                                      case 3:
-                                        break;
-                                      default:
-                                        break;
-                                    }
-                                  }),
-                              onTap: () => _callbackUrl(account),
-                            );
+                            return _AccountListTitle(account: account);
                           }),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.add),
+                      title: Text(localizations.accountLoginOther),
+                      onTap: () {
+                        navigation.pushNamed(AddAccountScreen.route);
+                      },
                     ),
                   ],
                 ),
@@ -156,5 +96,87 @@ class _AccountScreenState extends State<AccountScreen> {
                 child: Text(localizations.guiCopyright))),
       ],
     ));
+  }
+}
+
+class _AccountListTitle extends StatefulWidget {
+  final Account account;
+  const _AccountListTitle({Key? key, required this.account}) : super(key: key);
+
+  @override
+  __AccountListTitleState createState() => __AccountListTitleState();
+}
+
+class __AccountListTitleState extends State<_AccountListTitle> {
+  Future<void> _callbackUrl(String token) async {
+    if (callback != null) {
+      String url = callback!;
+      url = url.replaceAll(r"${token}", token);
+      window.location.href = url;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CircleAvatar avatar;
+
+    String? avatarUrl =
+        widget.account.avatarUrl(RPMTWApiClient.lastInstance.baseUrl);
+
+    if (avatarUrl != null) {
+      avatar = CircleAvatar(
+        backgroundImage: NetworkImage(avatarUrl),
+      );
+    } else {
+      /// 隨機生成顏色
+      Color color =
+          Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+      avatar = CircleAvatar(
+        backgroundColor: color,
+        child: Text(
+          widget.account.username.characters.first,
+          style: const TextStyle(color: Colors.white),
+        ),
+      );
+    }
+
+    String token = widget.account.token;
+
+    return ListTile(
+      leading: avatar,
+      title: Text(widget.account.username),
+      subtitle: Text(widget.account.email),
+      hoverColor: const Color.fromARGB(85, 31, 30, 30),
+      trailing: PopupMenuButton(
+          tooltip: "顯示更多",
+          itemBuilder: (context) => [
+                const PopupMenuItem(
+                  child: Text("使用本帳號登入"),
+                  value: 1,
+                ),
+                const PopupMenuItem(
+                  child: Text("管理帳號"),
+                  value: 2,
+                ),
+                const PopupMenuItem(
+                  child: Text("移除帳號"),
+                  value: 3,
+                ),
+              ],
+          onSelected: (int _index) {
+            switch (_index) {
+              case 1:
+                _callbackUrl(token);
+                break;
+              case 2:
+                break;
+              case 3:
+                break;
+              default:
+                break;
+            }
+          }),
+      onTap: () => _callbackUrl(token),
+    );
   }
 }
