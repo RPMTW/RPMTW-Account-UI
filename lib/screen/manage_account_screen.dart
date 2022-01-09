@@ -4,8 +4,7 @@ import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_account_ui/widget/ok_close.dart';
-import 'package:rpmtw_api_client/rpmtw_api_client.dart';
-
+import 'package:rpmtw_api_client_flutter/rpmtw_api_client_flutter.dart';
 class ManageAccountScreen extends StatefulWidget {
   static const String route = '/manage-account';
   final Account account;
@@ -88,7 +87,7 @@ class _AvatarState extends State<_Avatar> {
                       _UpdatingAvatar(result: result, account: account));
             }
           },
-          icon: const Icon(Icons.photo_camera),
+          icon: const Icon(Icons.add_a_photo),
           tooltip: localizations.changeAvatar,
         )
       ],

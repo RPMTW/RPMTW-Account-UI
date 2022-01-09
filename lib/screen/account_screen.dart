@@ -1,7 +1,3 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
 import 'package:rpmtw_account_ui/screen/manage_account_screen.dart';
@@ -9,6 +5,7 @@ import 'package:rpmtw_account_ui/screen/manage_account_screen.dart';
 import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
+import 'package:rpmtw_api_client_flutter/rpmtw_api_client_flutter.dart';
 
 class _AccountNotification extends Notification {
   List<Account> users;

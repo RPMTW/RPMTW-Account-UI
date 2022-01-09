@@ -239,14 +239,19 @@ packages:
     source: hosted
     version: "3.0.1+1"
   rpmtw_api_client:
+    dependency: transitive
+    description:
+      name: rpmtw_api_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  rpmtw_api_client_flutter:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6239d348425f587c6292dfb3cc11388982224b5d"
-      url: "https://github.com/RPMTW/RPMTW-API-Client.git"
-    source: git
-    version: "1.0.1+1"
+      name: rpmtw_api_client_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
