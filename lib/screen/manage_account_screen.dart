@@ -1,10 +1,12 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rpmtw_account_ui/models/account.dart';
+import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_account_ui/widget/ok_close.dart';
 import 'package:rpmtw_api_client_flutter/rpmtw_api_client_flutter.dart';
+
 class ManageAccountScreen extends StatefulWidget {
   static const String route = '/manage-account';
   final Account account;
@@ -30,6 +32,13 @@ class _ManageAccountScreenState extends State<ManageAccountScreen> {
       appBar: AppBar(
         title: Text("${localizations.accountActionManage} - ${account.email}"),
         centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          tooltip: localizations.guiBack,
+          onPressed: () {
+            navigation.pushNamed(AccountScreen.route);
+          },
+        ),
       ),
       body: ListView(
         children: [
