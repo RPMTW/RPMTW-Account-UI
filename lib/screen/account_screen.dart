@@ -47,70 +47,64 @@ class _AccountScreenState extends State<AccountScreen> {
       child: Scaffold(
           body: Stack(
         children: [
-          Center(
-            child: Builder(builder: (context) {
-              Size size = MediaQuery.of(context).size;
-              return Container(
-                alignment: Alignment.center,
-                width: size.width / 4,
-                height: size.height / 1.8,
-                child: ColoredBox(
-                  color: const Color.fromARGB(55, 15, 15, 15),
-                  child: Column(
-                    children: [
-                      ...callback != null
-                          ? [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(localizations.accountSelect,
-                                  style: const TextStyle(fontSize: 20)),
-                              Text(Uri.parse(callback!).host)
-                            ]
-                          : [],
-                      Expanded(
-                        child: ListView.builder(
-                            itemCount: AccountHandler.userCount,
-                            itemBuilder: (context, index) {
-                              Account account = users[index];
+          Column(
+            children: [
+              const SizedBox(height: 15),
+              Image.asset(
+                "assets/images/RPMTW_Logo.gif",
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(height: 10),
+              Text(localizations.accountTitle,
+                  style: const TextStyle(fontSize: 50)),
+              Center(
+                child: Builder(builder: (context) {
+                  Size size = MediaQuery.of(context).size;
+                  return Container(
+                    alignment: Alignment.center,
+                    width: size.width / (size.width > 500 ? 4 : 1.5),
+                    height: size.height / 1.8,
+                    child: ColoredBox(
+                      color: const Color.fromARGB(55, 15, 15, 15),
+                      child: ListView(
+                        children: [
+                          ...callback != null
+                              ? [
+                                  const SizedBox(height: 10),
+                                  Text(localizations.accountSelect,
+                                      style: const TextStyle(fontSize: 20),
+                                      textAlign: TextAlign.center),
+                                  Text(Uri.parse(callback!).host,
+                                      textAlign: TextAlign.center)
+                                ]
+                              : [],
+                          Column(
+                            children: users.map((account) {
                               if (account.emailVerified) {
                                 return _AccountListTitle(account: account);
                               } else {
                                 return const SizedBox.shrink();
                               }
-                            }),
+                            }).toList(),
+                          ),
+                          const SizedBox(height: 10),
+                          ListTile(
+                            leading: const Icon(Icons.add),
+                            title: Text(localizations.accountLoginOther),
+                            hoverColor: const Color.fromARGB(85, 31, 30, 30),
+                            onTap: () {
+                              navigation.pushNamed(AddAccountScreen.route);
+                            },
+                          ),
+                        ],
                       ),
-                      ListTile(
-                        leading: const Icon(Icons.add),
-                        title: Text(localizations.accountLoginOther),
-                        hoverColor: const Color.fromARGB(85, 31, 30, 30),
-                        onTap: () {
-                          navigation.pushNamed(AddAccountScreen.route);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
+                    ),
+                  );
+                }),
+              ),
+            ],
           ),
-          Positioned.fill(
-              top: 25,
-              child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/RPMTW_Logo.gif",
-                        width: 100,
-                        height: 100,
-                      ),
-                      const SizedBox(height: 10),
-                      Text(localizations.accountTitle,
-                          style: const TextStyle(fontSize: 50)),
-                    ],
-                  ))),
           Positioned.fill(
               bottom: 5,
               child: Align(

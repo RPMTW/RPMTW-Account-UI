@@ -19,7 +19,7 @@ void main() async {
   }
 
   AccountHandler.init();
-  RPMTWApiClient(development: true); // Initialize RPMTWApiClient
+  RPMTWApiClient.init(development: true); // Initialize RPMTWApiClient
   runApp(const AccountApp());
 }
 
@@ -45,15 +45,16 @@ class AccountApp extends StatelessWidget {
             fontFamily: "font"),
         initialRoute: HomePage.route,
         onGenerateRoute: (settings) {
-          if (settings.name == HomePage.route ||
-              settings.name == '/index.html') {
+          String name = settings.name ?? "/";
+
+          if (name == HomePage.route || name == '/index.html') {
             return MaterialPageRoute(
                 settings: settings, builder: (context) => const HomePage());
-          } else if (settings.name == AddAccountScreen.route) {
+          } else if (name == AddAccountScreen.route) {
             return MaterialPageRoute(
                 settings: settings,
                 builder: (context) => const AddAccountScreen());
-          } else if (settings.name == AccountScreen.route) {
+          } else if (name == AccountScreen.route) {
             return MaterialPageRoute(
                 settings: settings,
                 builder: (context) => const AccountScreen());
