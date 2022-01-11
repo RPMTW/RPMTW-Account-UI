@@ -48,8 +48,8 @@ class AccountHandler {
         email: user.email,
         emailVerified: user.emailVerified,
         avatarStorageUUID: user.avatarStorageUUID,
-        status: user.status,
-        message: user.message,
+        status: user.statusCode,
+        message: user.statusMessage,
         token: token);
     return add(account);
   }
