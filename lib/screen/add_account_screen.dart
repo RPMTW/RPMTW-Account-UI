@@ -6,6 +6,7 @@ import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
+import 'package:rpmtw_api_client_flutter/rpmtw_api_client_flutter.dart';
 
 class AddAccountScreen extends StatefulWidget {
   static const String route = '/add-account';
@@ -20,8 +21,8 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
 
   @override
   void initState() {
+    _apiClient = RPMTWApiClient.lastInstance;
     super.initState();
-    _apiClient = RPMTWApiClient(development: true);
   }
 
   Future<String?> _loginUser(LoginData data) async {
@@ -42,6 +43,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
       return localizations.accountPasswordError;
     }
     AccountHandler.addByUser(user, token);
+    return null;
   }
 
   Future<String?> _signupUser(SignupData data) async {
@@ -65,9 +67,12 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
     String token = createUserResult.token;
 
     AccountHandler.addByUser(user, token);
+    return null;
   }
 
-  Future<String?> _recoverPassword(String name) async {}
+  Future<String?> _recoverPassword(String name) async {
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +109,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
           if (email!.isEmpty || !regExp.hasMatch(email)) {
             return localizations.accountInvalidEmail;
           }
+          return null;
         },
         passwordValidator: (String? password) {
           if (password!.length < 6) {
@@ -119,6 +125,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
             // 密碼必須至少包含一個數字
             return localizations.accountPasswordNeedsNumber;
           }
+          return null;
         },
         onLogin: _loginUser,
         onSignup: _signupUser,
@@ -144,6 +151,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               ));
             }
           }
+          return null;
         },
         onResendCode: (singUPData) async {
           // RPMTW 暫時不支援重新寄送驗證碼
@@ -160,6 +168,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                 if (value == null || value.isEmpty) {
                   return localizations.accountUsernameError;
                 }
+                return null;
               }),
         ],
         onSubmitAnimationCompleted: () {

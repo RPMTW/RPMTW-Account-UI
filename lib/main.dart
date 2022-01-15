@@ -19,7 +19,7 @@ void main() async {
   }
 
   AccountHandler.init();
-  RPMTWApiClient.init(development: true); // Initialize RPMTWApiClient
+  RPMTWApiClient.init(); // Initialize RPMTWApiClient
   runApp(const AccountApp());
 }
 
