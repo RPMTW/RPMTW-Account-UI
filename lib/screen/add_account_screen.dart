@@ -152,8 +152,6 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
                 email: account.email,
                 emailVerified: true,
                 avatarStorageUUID: account.avatarStorageUUID,
-                status: account.statusCode,
-                message: account.statusMessage,
                 token: account.token,
               ));
             }

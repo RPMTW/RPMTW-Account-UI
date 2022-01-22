@@ -13,11 +13,16 @@ class AccountHandler {
   static void init() {
     storage = html.window.localStorage;
     if (storage.containsKey('rpmtw_account')) {
-      String account = storage['rpmtw_account']!;
-      List accountList = json.decode(account);
-      List<Map<String, dynamic>> accountJson =
-          (accountList).cast<Map<String, dynamic>>();
-      users = accountJson.map((user) => Account.fromMap(user)).toList();
+      try {
+        String account = storage['rpmtw_account']!;
+        List accountList = json.decode(account);
+        List<Map<String, dynamic>> accountJson =
+            (accountList).cast<Map<String, dynamic>>();
+        users = accountJson.map((user) => Account.fromMap(user)).toList();
+      } catch (e) {
+        storage.remove('rpmtw_account');
+        users = [];
+      }
     } else {
       users = [];
     }
@@ -48,8 +53,6 @@ class AccountHandler {
         email: user.email,
         emailVerified: user.emailVerified,
         avatarStorageUUID: user.avatarStorageUUID,
-        status: user.statusCode,
-        message: user.statusMessage,
         token: token);
     return add(account);
   }

@@ -9,29 +9,23 @@ class Account extends User {
       required String email,
       required bool emailVerified,
       required String? avatarStorageUUID,
-      required int status,
-      required String message,
       required this.token})
       : super(
-            uuid: uuid,
-            username: username,
-            email: email,
-            emailVerified: emailVerified,
-            avatarStorageUUID: avatarStorageUUID,
-            status: status,
-            message: message);
+          uuid: uuid,
+          username: username,
+          email: email,
+          emailVerified: emailVerified,
+          avatarStorageUUID: avatarStorageUUID,
+        );
 
   factory Account.fromMap(Map<String, dynamic> map) {
-    Map data = map['data'];
     return Account(
-        uuid: data['uuid'],
-        username: data['username'],
-        email: data['email'],
-        emailVerified: data['emailVerified'],
-        avatarStorageUUID: data['avatarStorageUUID'],
-        status: map['status'],
-        message: map['message'],
-        token: data['token']);
+        uuid: map['uuid'],
+        username: map['username'],
+        email: map['email'],
+        emailVerified: map['emailVerified'],
+        avatarStorageUUID: map['avatarStorageUUID'],
+        token: map['token']);
   }
 
   static Account? findByEmail(String email) {
@@ -45,16 +39,12 @@ class Account extends User {
   @override
   Map<String, dynamic> toMap() {
     return {
-      "status": statusCode,
-      "message": statusMessage,
-      "data": {
-        'uuid': uuid,
-        'username': username,
-        'email': email,
-        'emailVerified': emailVerified,
-        'avatarStorageUUID': avatarStorageUUID,
-        'token': token
-      }
+      'uuid': uuid,
+      'username': username,
+      'email': email,
+      'emailVerified': emailVerified,
+      'avatarStorageUUID': avatarStorageUUID,
+      'token': token
     };
   }
 }
