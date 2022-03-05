@@ -10,9 +10,7 @@
             "type": "dart",
             "program": "lib/main.dart",
             "toolArgs": [
-                "--web-port=41351",
-                "--web-renderer",
-                "html"
+                "--web-port=41351"
             ],
         },
         {
@@ -22,9 +20,7 @@
             "flutterMode": "profile",
             "program": "lib/main.dart",
             "toolArgs": [
-                "--web-port=41351",
-                "--web-renderer",
-                "html"
+                "--web-port=41351"
             ],
         }
     ]

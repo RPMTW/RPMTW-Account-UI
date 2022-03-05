@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:rpmtw_account_ui/main.dart';
 import 'package:rpmtw_account_ui/models/account.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
@@ -105,12 +104,6 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
           resendCodeSuccess: localizations.accountAuthCodeSent,
           confirmSignupButton: localizations.guiConfirm,
         ),
-        theme: LoginTheme(
-            textFieldStyle: fontStyle,
-            footerTextStyle: fontStyle,
-            bodyStyle: fontStyle,
-            titleStyle: fontStyle,
-            buttonStyle: fontStyle),
         userValidator: (String? email) {
           RegExp regExp = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
           if (email!.isEmpty || !regExp.hasMatch(email)) {
