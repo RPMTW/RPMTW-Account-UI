@@ -75,7 +75,10 @@ class _AccountScreenState extends State<AccountScreen> {
                                   Text(localizations.accountSelect,
                                       style: const TextStyle(fontSize: 20),
                                       textAlign: TextAlign.center),
-                                  Text(Uri.parse(callback!).host,
+                                  Text(
+                                      callback!.queryParameters[
+                                              "service_name"] ??
+                                          callback!.host,
                                       textAlign: TextAlign.center)
                                 ]
                               : [],

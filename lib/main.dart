@@ -16,7 +16,7 @@ void main() async {
   String? _callback = _uri.queryParameters["redirect_uri"];
 
   if (_callback != null && Uri.tryParse(_callback) != null) {
-    callback = _callback;
+    callback = Uri.parse(_callback);
   }
 
   AccountHandler.init();

@@ -70,7 +70,7 @@ class AccountHandler {
 
   static void callbackUrl(String token) {
     if (callback != null) {
-      Uri uri = Uri.parse(callback!)
+      Uri uri = callback!
         ..replace(queryParameters: {
           "access_token": token,
         });
