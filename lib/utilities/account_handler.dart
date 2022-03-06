@@ -70,9 +70,12 @@ class AccountHandler {
 
   static void callbackUrl(String token) {
     if (callback != null) {
-      String url = callback!;
-      url = url.replaceAll(r"${token}", token);
-      html.window.location.href = url;
+      Uri uri = Uri.parse(callback!)
+        ..replace(queryParameters: {
+          "access_token": token,
+        });
+
+      html.window.location.href = uri.toString();
     }
   }
 }

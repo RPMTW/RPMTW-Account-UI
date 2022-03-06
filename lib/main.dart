@@ -13,9 +13,9 @@ import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 void main() async {
   Uri _uri = Uri.parse(window.location.href);
-  String? _callback = _uri.queryParameters["redirect_uri"] ??
-      _uri.queryParameters["rpmtw_auth_callback"];
-  if (_callback != null && _callback.contains(r"${token}")) {
+  String? _callback = _uri.queryParameters["redirect_uri"];
+
+  if (_callback != null && Uri.tryParse(_callback) != null) {
     callback = _callback;
   }
 
