@@ -75,7 +75,7 @@ class AccountHandler {
           scheme: _callback.scheme,
           host: _callback.host,
           path: _callback.path,
-          queryParameters: _callback.queryParameters
+          queryParameters: Map.from(_callback.queryParameters)
             ..addAll({
               "access_token": token,
             }),
