@@ -70,10 +70,18 @@ class AccountHandler {
 
   static void callbackUrl(String token) {
     if (callback != null) {
-      Uri uri = callback!
-        ..replace(queryParameters: {
-          "access_token": token,
-        });
+      Uri _callback = callback!;
+      Uri uri = Uri(
+          scheme: _callback.scheme,
+          host: _callback.host,
+          path: _callback.path,
+          queryParameters: _callback.queryParameters
+            ..addAll({
+              "access_token": token,
+            }),
+          fragment: _callback.fragment,
+          port: _callback.port,
+          userInfo: _callback.userInfo);
 
       html.window.location.href = uri.toString();
     }
