@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
+import 'package:rpmtw_account_ui/models/callback_info.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
-import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 void main() async {
@@ -16,7 +16,8 @@ void main() async {
   String? _callback = _uri.queryParameters["redirect_uri"];
 
   if (_callback != null && Uri.tryParse(_callback) != null) {
-    callback = Uri.parse(_callback);
+    CallbackInfo info = CallbackInfo.fromUrl(_callback);
+    info.save();
   }
 
   AccountHandler.init();

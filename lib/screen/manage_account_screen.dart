@@ -112,7 +112,7 @@ class _UpdatingAvatar extends StatelessWidget {
 
   Future<Account> updating(BuildContext context) async {
     PlatformFile file = result.files.single;
-    RPMTWApiClient apiClient = RPMTWApiClient.lastInstance;
+    RPMTWApiClient apiClient = RPMTWApiClient.instance;
     Storage storage =
         await apiClient.storageResource.createStorageByBytes(file.bytes!);
 

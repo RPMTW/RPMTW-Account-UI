@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rpmtw_account_ui/models/callback_info.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
 import 'package:rpmtw_account_ui/screen/manage_account_screen.dart';
 
@@ -24,10 +25,13 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   late List<Account> users;
+  late CallbackInfo? info;
 
   @override
   void initState() {
     users = AccountHandler.users;
+    info = CallbackInfo.instance;
+
     super.initState();
   }
 
@@ -69,16 +73,13 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: const Color.fromARGB(55, 15, 15, 15),
                       child: ListView(
                         children: [
-                          ...callback != null
+                          ...info != null
                               ? [
                                   const SizedBox(height: 10),
                                   Text(localizations.accountSelect,
                                       style: const TextStyle(fontSize: 20),
                                       textAlign: TextAlign.center),
-                                  Text(
-                                      callback!.queryParameters[
-                                              "service_name"] ??
-                                          callback!.host,
+                                  Text(info!.serviceName,
                                       textAlign: TextAlign.center)
                                 ]
                               : [],
@@ -129,10 +130,12 @@ class _AccountListTitle extends StatefulWidget {
 
 class __AccountListTitleState extends State<_AccountListTitle> {
   late String token;
+  late CallbackInfo? info;
 
   @override
   void initState() {
     token = widget.account.token;
+    info = CallbackInfo.instance;
 
     super.initState();
   }
@@ -147,7 +150,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
       trailing: PopupMenuButton(
           tooltip: "顯示更多",
           itemBuilder: (context) => [
-                ...callback != null
+                ...info != null
                     ? [
                         PopupMenuItem(
                           child: Text(localizations.accountActionLogin),
@@ -167,7 +170,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
           onSelected: (int _index) {
             switch (_index) {
               case 1:
-                AccountHandler.callbackUrl(token);
+                AccountHandler.callbackUrl(info, token);
                 break;
               case 2:
                 navigation.push(MaterialPageRoute(
@@ -182,7 +185,7 @@ class __AccountListTitleState extends State<_AccountListTitle> {
                 break;
             }
           }),
-      onTap: () => AccountHandler.callbackUrl(token),
+      onTap: () => AccountHandler.callbackUrl(info, token),
     );
   }
 }

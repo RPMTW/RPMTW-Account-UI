@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpmtw_account_ui/models/account.dart';
+import 'package:rpmtw_account_ui/models/callback_info.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/utilities/data.dart';
@@ -21,7 +22,7 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
 
   @override
   void initState() {
-    _apiClient = RPMTWApiClient.lastInstance;
+    _apiClient = RPMTWApiClient.instance;
     super.initState();
   }
 
@@ -170,10 +171,11 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               }),
         ],
         onSubmitAnimationCompleted: () {
-          if (AccountHandler.userCount == 1 && callback != null) {
+          CallbackInfo? info = CallbackInfo.instance;
+          if (AccountHandler.userCount == 1 && info != null) {
             //僅有一個帳號
             String token = AccountHandler.users[0].token;
-            AccountHandler.callbackUrl(token);
+            AccountHandler.callbackUrl(info, token);
           } else {
             navigation.pushNamed(AccountScreen.route);
           }
@@ -197,6 +199,13 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
           LoginProvider(
             icon: FontAwesomeIcons.github,
             label: 'Github',
+            callback: () async {
+              return localizations.guiWIP;
+            },
+          ),
+          LoginProvider(
+            icon: FontAwesomeIcons.qq,
+            label: 'QQ',
             callback: () async {
               return localizations.guiWIP;
             },

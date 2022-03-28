@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:html' as html;
 
 import 'package:rpmtw_account_ui/models/account.dart';
-import 'package:rpmtw_account_ui/utilities/data.dart';
+import 'package:rpmtw_account_ui/models/callback_info.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
 class AccountHandler {
@@ -68,22 +68,8 @@ class AccountHandler {
     storage['rpmtw_account'] = json.encode(accountJson);
   }
 
-  static void callbackUrl(String token) {
-    if (callback != null) {
-      Uri _callback = callback!;
-      Uri uri = Uri(
-          scheme: _callback.scheme,
-          host: _callback.host,
-          path: _callback.path,
-          queryParameters: Map.from(_callback.queryParameters)
-            ..addAll({
-              "access_token": token,
-            }),
-          fragment: _callback.fragment,
-          port: _callback.port,
-          userInfo: _callback.userInfo);
-
-      html.window.location.href = uri.toString();
-    }
+  static void callbackUrl(CallbackInfo? info, String token) {
+    if (info == null) return;
+    html.window.location.href = info.getAuthUri(token).toString();
   }
 }
