@@ -4,3 +4,5 @@ import 'package:no_context_navigation/no_context_navigation.dart';
 
 NavigatorState get navigation => NavigationService.navigationKey.currentState!;
 AppLocalizations get localizations => AppLocalizations.of(navigation.context)!;
+bool development =
+    const bool.fromEnvironment("wiki.development", defaultValue: false);

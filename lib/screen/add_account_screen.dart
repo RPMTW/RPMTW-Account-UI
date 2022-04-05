@@ -210,6 +210,13 @@ class _AddAccountScreenState extends State<AddAccountScreen> {
               return localizations.guiWIP;
             },
           ),
+          LoginProvider(
+            icon: FontAwesomeIcons.weixin,
+            label: 'WeChat',
+            callback: () async {
+              return localizations.guiWIP;
+            },
+          ),
         ]);
   }
 }

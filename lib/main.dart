@@ -1,5 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,10 +9,13 @@ import 'package:rpmtw_account_ui/models/callback_info.dart';
 import 'package:rpmtw_account_ui/utilities/account_handler.dart';
 import 'package:rpmtw_account_ui/screen/account_screen.dart';
 import 'package:rpmtw_account_ui/screen/add_account_screen.dart';
+import 'package:rpmtw_account_ui/utilities/data.dart';
 import 'package:rpmtw_api_client/rpmtw_api_client.dart';
 
+import 'package:url_strategy/url_strategy.dart';
+
 void main() async {
-  Uri _uri = Uri.parse(window.location.href);
+  Uri _uri = Uri.parse(html.window.location.href);
   String? _callback = _uri.queryParameters["redirect_uri"];
 
   if (_callback != null && Uri.tryParse(_callback) != null) {
@@ -21,7 +24,17 @@ void main() async {
   }
 
   AccountHandler.init();
-  RPMTWApiClient.init(); // Initialize RPMTWApiClient
+  RPMTWApiClient.init(development: development); // Initialize RPMTWApiClient
+
+  html.Element? base = html.document.querySelector('base');
+
+  if (base != null) {
+    base.setAttribute("href", "/");
+  } else {
+    html.document.createElement('base').setAttribute("href", "/");
+  }
+
+  setPathUrlStrategy();
   runApp(const AccountApp());
 }
 
