@@ -3,7 +3,7 @@
   "accountActionLogout": "登出帳號",
   "accountActionManage": "管理帳號",
   "accountAdditionalSignup": "請填寫依個表格嚟完成註冊帳號。",
-  "accountAlreadyUsedEmail": "呢個電郵地址已被其他人使用。",
+  "accountAlreadyUsedEmail": "依個電郵地址已被其他人使用。",
   "accountAuthCodeError": "驗證碼錯咗，請試多一次。",
   "accountAuthCodeIntro": "驗證碼已傳送到您嘅電郵信箱，請輸入驗證碼嚟啟用您嘅帳號。",
   "accountAuthCodeSent": "驗證碼已發送到您嘅電郵信箱。",
